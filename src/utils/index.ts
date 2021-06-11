@@ -1,3 +1,9 @@
+/** If the current rendering environment is likely ReactDOMServer? */
+export const isServer = typeof window === 'undefined';
+
+/** If the current rendering environment is a browser */
+export const isBrowser = !isServer;
+
 export function ensureUnit(
   value: string | number | Array<string | number>,
   unit = 'px'
