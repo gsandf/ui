@@ -36,11 +36,11 @@ export const ScreenReaderContent = styled(Box)`
 `;
 
 export interface StackProps extends ThemeMixinProps {
-  $align: ResponsiveProperty<'alignItems'>;
-  $direction: ResponsiveProperty<'flexDirection'>;
-  $gap: ResponsiveProperty<'margin', 'space'>;
-  $justify: ResponsiveProperty<'justifyContent'>;
-  $wrap: ResponsiveProperty<'flexWrap'>;
+  $align?: ResponsiveProperty<'alignItems'>;
+  $direction?: ResponsiveProperty<'flexDirection'>;
+  $gap?: ResponsiveProperty<'margin', 'space'>;
+  $justify?: ResponsiveProperty<'justifyContent'>;
+  $wrap?: ResponsiveProperty<'flexWrap'>;
 }
 
 /**
