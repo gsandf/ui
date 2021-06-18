@@ -1115,6 +1115,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@blakek/array-split@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@blakek/array-split/-/array-split-2.0.1.tgz#8380bc7234e316eaa776969ed94b703a8763aaef"
+  integrity sha512-Dj12iQ9co2uBkJcQClJfPfwJc/xkZEGYyu8SfvRvknDt8+o/vuusc577fcgha3HDZDZKkFybJ8GWLXe6ufmorw==
+
 "@blakek/curry@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@blakek/curry/-/curry-2.0.2.tgz#979e927bcf5fa0426d2af681d7131df5791d1cd4"
