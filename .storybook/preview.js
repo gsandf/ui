@@ -16,14 +16,19 @@ const withThemeProvider = (Story, context) => {
 
 export const decorators = [withThemeProvider];
 
+const presetColors = Object.entries(defaultTheme.colors).map(
+  ([title, color]) => ({ color, title })
+);
+
 export const parameters = {
   actions: {
     argTypesRegex: '^on[A-Z].*'
   },
   controls: {
+    hideNoControlsWarning: true,
     matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
-    }
+      color: /\$(bg|bgColor|color)$/i
+    },
+    presetColors
   }
 };
