@@ -2,13 +2,12 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Box, Button, HStack, VStack } from '../components';
 import { useLocalStorage } from '../hooks';
-import { ThemeMixinProps } from '../theme';
 
 export default {
   title: 'Hooks/useLocalStorage'
-} as Meta<ThemeMixinProps>;
+} as Meta<void>;
 
-export const BasicUsage: Story<ThemeMixinProps> = () => {
+export const BasicUsage: Story<void> = () => {
   const [value, setValue] = useLocalStorage('basicUsage', 0);
 
   return (

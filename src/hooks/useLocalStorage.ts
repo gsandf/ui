@@ -5,6 +5,14 @@ const hasLocalStorage = isBrowser && window.localStorage instanceof Storage;
 
 type SetValue<Value> = Dispatch<SetStateAction<Value>>;
 
+/**
+ * Saves a value in `localStorage` so it can be persisted between page refresh.
+ * This hook is used similar to `useState`, but the first argument is the key
+ * used to save/lookup the value in `localStorage`.
+ *
+ * If `localStorage` isn't available - such as during a server render - the
+ * initial value will be returned.
+ */
 export function useLocalStorage<Value>(
   key: string,
   initialValue: Value
@@ -33,13 +41,12 @@ export function useLocalStorage<Value>(
   });
 
   const setValue = (value: Value) => {
+    // Allow value to be a function to keep the same API as useState
+    const valueToStore = value instanceof Function ? value(storedValue) : value;
+
+    setStoredValue(valueToStore);
+
     try {
-      // Allow value to be a function to keep the same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-
-      setStoredValue(valueToStore);
-
       if (hasLocalStorage) {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
