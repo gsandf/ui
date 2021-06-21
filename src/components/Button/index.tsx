@@ -1,6 +1,6 @@
-import { StyledComponentProps } from 'src/utils';
 import styled, { DefaultTheme } from 'styled-components';
 import { ThemeMixinProps } from '../../theme';
+import { StyledComponentProps } from '../../utils';
 
 interface _ButtonProps extends ThemeMixinProps {
   disabled?: boolean;
