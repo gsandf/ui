@@ -2,14 +2,13 @@ import { Meta } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 import { Box, Center, VStack } from '../components';
 import { useClickedOutside } from '../hooks';
-import { ThemeMixinProps } from '../theme';
 
 export default {
   title: 'Hooks/useClickedOutside',
   parameters: {
     layout: 'centered'
   }
-} as Meta<ThemeMixinProps>;
+} as Meta<void>;
 
 type ClickLocation = 'inside' | 'outside';
 
