@@ -32,6 +32,8 @@ export function ensureUnit(
   return value;
 }
 
+export const noop = () => {};
+
 export function omit<T extends Record<string, unknown>, K extends keyof T>(
   obj: T,
   key: K
