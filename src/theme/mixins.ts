@@ -2,9 +2,42 @@ import { get, getOr } from '@blakek/deep';
 import { css, CSSProp } from 'styled-components';
 import type { CreatedTheme } from '.';
 import { omit } from '../utils';
+import { ResponsiveRule } from './types';
 
 export function createMixins(media: CreatedTheme<unknown>['media']) {
   const mediaQueries = Object.values(omit(media.up, 'from'));
+
+  function mapResponsive<T>(
+    styles: ResponsiveRule<T>,
+    mapper: (val: T) => CSSProp
+  ) {
+    if (styles === undefined || styles === null) {
+      return;
+    }
+
+    if (!Array.isArray(styles)) {
+      return mapper(styles);
+    }
+
+    const [defaultStyle, ...otherStyles] = styles;
+
+    const breakpointStyles = otherStyles.flatMap((style, index) => {
+      const styleRules = mapper(style);
+
+      if (!styleRules) return [];
+
+      return css`
+        ${mediaQueries[index]} {
+          ${styleRules}
+        }
+      `;
+    });
+
+    return css`
+      ${mapper(defaultStyle)}
+      ${breakpointStyles}
+    `;
+  }
 
   function createRuleForProp(
     ruleName: string,
@@ -25,8 +58,6 @@ export function createMixins(media: CreatedTheme<unknown>['media']) {
           const styles = createRule({ ...props, [prop]: style });
 
           if (!styles) return [];
-
-          console.log({ mediaQueries, index });
 
           return css`
             ${mediaQueries[index]} {
@@ -165,6 +196,7 @@ export function createMixins(media: CreatedTheme<unknown>['media']) {
     createRuleForProp,
     flexChildMixin,
     flexContainerMixin,
+    mapResponsive,
     themeBordersMixin,
     themeColorsMixin,
     themeFontsMixin,

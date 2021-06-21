@@ -1133,6 +1133,11 @@
     "@blakek/curry" "^2.0.2"
     pathington "^1.1.7"
 
+"@blakek/range@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@blakek/range/-/range-1.0.0.tgz#92c58f03fdf3c72533a1a58cad548e5fc4f1df57"
+  integrity sha512-fVPmbTjL/wpb6Iv7/Wg449mdiB2Z/lDId3J8OIAnkBzIGmtNwbn6cbPznPUnpfMHnCAgnI8xafAIAI+G4guXRw==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

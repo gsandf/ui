@@ -1,7 +1,11 @@
 import { hideVisually } from 'polished';
 import styled, { css } from 'styled-components';
-import { ResponsiveProperty, ThemeMixinProps } from '../../theme';
-import { ensureUnit, StyledComponentProps } from '../../utils';
+import type {
+  ResponsiveProperty,
+  ResponsiveRule,
+  ThemeMixinProps
+} from '../../theme';
+import { ensureUnit } from '../../utils';
 
 /** A simple box. By default, it renders a `<div />` */
 export const Box = styled.div<ThemeMixinProps>`
@@ -35,7 +39,7 @@ export const ScreenReaderContent = styled(Box)`
   ${hideVisually()}
 `;
 
-interface _StackProps extends ThemeMixinProps {
+interface StackProps extends ThemeMixinProps {
   $align?: ResponsiveProperty<'alignItems'>;
   $direction?: ResponsiveProperty<'flexDirection'>;
   $gap?: ResponsiveProperty<'margin', 'space'>;
@@ -43,13 +47,11 @@ interface _StackProps extends ThemeMixinProps {
   $wrap?: ResponsiveProperty<'flexWrap'>;
 }
 
-export type StackProps = StyledComponentProps<typeof Stack>;
-
 /**
  * `Stack` is a `Flex` with helpers to add spacing between elements. The
  * default direction is a column.
  */
-export const Stack = styled(Flex)<_StackProps>`
+export const Stack = styled(Flex)<StackProps>`
   flex-direction: column;
 
   ${p =>
@@ -88,4 +90,51 @@ export const HStack = styled(Stack)`
  */
 export const VStack = styled(Stack)`
   align-items: center;
+`;
+
+export type BasicGridProps = {
+  columns?: ResponsiveRule<number>;
+  minChildWidth?: ResponsiveProperty<'width', 'space'>;
+  spacing?: ResponsiveProperty<'gap', 'space'>;
+  spacingX?: ResponsiveProperty<'gap', 'space'>;
+  spacingY?: ResponsiveProperty<'gap', 'space'>;
+};
+
+export const BasicGrid = styled(Flex)<BasicGridProps>`
+  display: grid;
+
+  ${p => {
+    const { createRuleForProp } = p.theme.mixins;
+
+    return css`
+      ${createRuleForProp('gap', 'theme.space', 'spacing')}
+      ${createRuleForProp('column-gap', 'theme.space', 'spacingX')}
+      ${createRuleForProp('row-gap', 'theme.space', 'spacingY')}
+    `;
+  }}
+
+  ${p => {
+    const { mapResponsive } = p.theme.mixins;
+
+    if (p.columns) {
+      return mapResponsive(
+        p.columns,
+        columnCount =>
+          css`
+            grid-template-columns: repeat(${columnCount}, minmax(0, 1fr));
+          `
+      );
+    }
+
+    return mapResponsive(
+      p.minChildWidth,
+      minChildWidth =>
+        css`
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(${minChildWidth}, 1fr)
+          );
+        `
+    );
+  }}
 `;
