@@ -1,7 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { CSSProperties } from 'styled-components';
-import { simpleUSTelephoneFormat, Tel, TelProps } from '../components';
+import { Tel, TelProps } from '../components';
+import { simpleUSTelephoneFormat } from '../utils';
 
 export default {
   title: 'Typography/Tel',

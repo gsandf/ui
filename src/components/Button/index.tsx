@@ -1,16 +1,17 @@
+import { StyledComponentProps } from 'src/utils';
 import styled, { DefaultTheme } from 'styled-components';
 import { ThemeMixinProps } from '../../theme';
 
-type InheritedProps = ThemeMixinProps;
-
-export interface ButtonProps extends InheritedProps {
+interface _ButtonProps extends ThemeMixinProps {
   disabled?: boolean;
   isFullWidth?: boolean;
   variant?: keyof DefaultTheme['components']['Button']['variants'];
   type?: 'button' | 'reset' | 'submit';
 }
 
-export const Button = styled.button<ButtonProps>`
+export type ButtonProps = StyledComponentProps<typeof Button>;
+
+export const Button = styled.button<_ButtonProps>`
   align-items: center;
   appearance: none;
   background-color: transparent;

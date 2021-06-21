@@ -1,3 +1,12 @@
+import type {
+  AnyStyledComponent,
+  StyledComponentInnerComponent,
+  StyledComponentInnerOtherProps,
+  StyledComponentPropsWithRef
+} from 'styled-components';
+
+export * from './formatString';
+
 /** If the current rendering environment is likely ReactDOMServer? */
 export const isServer = typeof window === 'undefined';
 
@@ -33,3 +42,12 @@ export function omit<T extends Record<string, unknown>, K extends keyof T>(
   }
   return obj;
 }
+
+interface WithAsProp {
+  as?: React.ElementType | keyof JSX.IntrinsicElements;
+}
+
+export type StyledComponentProps<T extends AnyStyledComponent> =
+  StyledComponentPropsWithRef<StyledComponentInnerComponent<T>> &
+    StyledComponentInnerOtherProps<T> &
+    WithAsProp;

@@ -1,7 +1,7 @@
 import { hideVisually } from 'polished';
 import styled, { css } from 'styled-components';
 import { ResponsiveProperty, ThemeMixinProps } from '../../theme';
-import { ensureUnit } from '../../utils';
+import { ensureUnit, StyledComponentProps } from '../../utils';
 
 /** A simple box. By default, it renders a `<div />` */
 export const Box = styled.div<ThemeMixinProps>`
@@ -35,7 +35,7 @@ export const ScreenReaderContent = styled(Box)`
   ${hideVisually()}
 `;
 
-export interface StackProps extends ThemeMixinProps {
+interface _StackProps extends ThemeMixinProps {
   $align?: ResponsiveProperty<'alignItems'>;
   $direction?: ResponsiveProperty<'flexDirection'>;
   $gap?: ResponsiveProperty<'margin', 'space'>;
@@ -43,11 +43,13 @@ export interface StackProps extends ThemeMixinProps {
   $wrap?: ResponsiveProperty<'flexWrap'>;
 }
 
+export type StackProps = StyledComponentProps<typeof Stack>;
+
 /**
  * `Stack` is a `Flex` with helpers to add spacing between elements. The
  * default direction is a column.
  */
-export const Stack = styled(Flex)<StackProps>`
+export const Stack = styled(Flex)<_StackProps>`
   flex-direction: column;
 
   ${p =>

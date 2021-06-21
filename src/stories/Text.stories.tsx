@@ -38,7 +38,18 @@ export const WithThemeProps: Story<TextProps> = (props: TextProps) => (
 WithThemeProps.args = {
   $bgColor: 'red',
   $color: 'white',
+  $p: 6,
   $textTransform: 'uppercase'
+};
+
+export const AsDifferentElement: Story<TextProps> = (props: TextProps) => (
+  <Text {...props} />
+);
+
+AsDifferentElement.args = {
+  as: 'h1',
+  children: 'Use `as` to control what `Text` renders',
+  $color: 'gray300'
 };
 
 export const TruncateText: Story<TextProps> = (props: TextProps) => (
@@ -50,7 +61,7 @@ export const TruncateText: Story<TextProps> = (props: TextProps) => (
 TruncateText.args = {
   $textTransform: 'uppercase',
   children:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nisi quasi amet possimus enim iure iste! Distinctio ea maiores laboriosam id assumenda at. Provident nesciunt voluptates iste doloribus qui consequatur.',
+    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi sed sunt dolorum, in dolore quae assumenda maxime, laboriosam dignissimos fuga at labore officiis harum corporis inventore distinctio quis perspiciatis dolores. Provident omnis optio nam tempora. Corporis officiis dolorum eaque necessitatibus cupiditate libero cumque sit quidem error deserunt facere eos beatae, illum accusamus voluptas obcaecati repellendus quis vitae numquam odio officia?',
   maxLineCount: 1
 };
 
