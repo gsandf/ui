@@ -19,3 +19,13 @@ export const BasicUsage = () => {
     </Center>
   );
 };
+
+export const WithFilteredBreakpoints = () => {
+  const breakpoint = useBreakpoint(['md', 'xxl']);
+
+  return (
+    <Center $bgColor="darken" $p={8}>
+      Of `base`, `md`, and `xxl`, the current breakpoint is {breakpoint}
+    </Center>
+  );
+};
