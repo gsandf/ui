@@ -8,7 +8,10 @@ import type {
 } from '../../theme';
 import { ensureUnit } from '../../utils';
 
-/** A simple box. By default, it renders a `<div />` */
+/**
+ * A simple box. By default, it renders a `<div />`. It can be useful as a base
+ * to create other components from as it accepts all theme mixins as props.
+ */
 export const Box = styled.div<ThemeMixinProps>`
   display: block;
   flex-grow: 0;
@@ -73,12 +76,12 @@ export const Hide = styled(Box)<HideProps>`
     `}
 `;
 
-interface StackProps extends ThemeMixinProps {
-  $align?: ResponsiveProperty<'alignItems'>;
-  $direction?: ResponsiveProperty<'flexDirection'>;
-  $gap?: ResponsiveProperty<'margin', 'space'>;
-  $justify?: ResponsiveProperty<'justifyContent'>;
-  $wrap?: ResponsiveProperty<'flexWrap'>;
+export interface StackProps extends ThemeMixinProps {
+  align?: ResponsiveProperty<'alignItems'>;
+  direction?: ResponsiveProperty<'flexDirection'>;
+  gap?: ResponsiveProperty<'margin', 'space'>;
+  justify?: ResponsiveProperty<'justifyContent'>;
+  wrap?: ResponsiveProperty<'flexWrap'>;
 }
 
 /**
@@ -89,24 +92,22 @@ export const Stack = styled(Flex)<StackProps>`
   flex-direction: column;
 
   ${p =>
-    p.$gap !== undefined &&
+    p.gap !== undefined &&
     css`
       > * {
-        ${p.theme.mixins.createRuleForProp('margin', '', '$gap')};
+        ${p.theme.mixins.createRuleForProp('margin', '', 'gap')};
       }
     `}
 
   ${p => {
     const createRuleForProp = p.theme.mixins.createRuleForProp;
     return css`
-      ${createRuleForProp('align-items', '', '$align')};
-      ${createRuleForProp('flex-direction', '', '$direction')};
-      ${createRuleForProp('justify-content', '', '$justify')};
-      ${createRuleForProp('flex-wrap', '', '$wrap')};
+      ${createRuleForProp('align-items', '', 'align')};
+      ${createRuleForProp('flex-direction', '', 'direction')};
+      ${createRuleForProp('justify-content', '', 'justify')};
+      ${createRuleForProp('flex-wrap', '', 'wrap')};
     `;
   }};
-
-  ${p => p.theme.mixins.themeMixin};
 `;
 
 /**
@@ -127,13 +128,26 @@ export const VStack = styled(Stack)`
 `;
 
 export type BasicGridProps = {
+  /** Set the number of columns directly */
   columns?: ResponsiveRule<number>;
+  /** Set the number of columns based on a required width for children */
   minChildWidth?: ResponsiveProperty<'width', 'space'>;
+  /** The gap between children both horizontally and vertically */
   spacing?: ResponsiveProperty<'gap', 'space'>;
-  spacingX?: ResponsiveProperty<'gap', 'space'>;
-  spacingY?: ResponsiveProperty<'gap', 'space'>;
+  /** The gap between children only in the horizontal direction */
+  spacingX?: ResponsiveProperty<'columnGap', 'space'>;
+  /** The gap between children only in the vertical direction */
+  spacingY?: ResponsiveProperty<'rowGap', 'space'>;
 };
 
+/**
+ * A basic grid component that distributes its children evenly.
+ *
+ * Either `columns` or `minChildWidth` can be used to set the number of
+ * columns. `columns` sets the column count to a set number while
+ * `minChildWidth` sets the column count based on a minimum width the child
+ * components need.
+ */
 export const BasicGrid = styled(Flex)<BasicGridProps>`
   display: grid;
 

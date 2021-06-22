@@ -8,6 +8,15 @@ interface _TextProps extends ThemeMixinProps {
   maxLineCount?: number;
 }
 
+/**
+ * Render text. By default, it renders a `<span />`; this can be controlled
+ * using the `as` prop.
+ *
+ * This is useful because it:
+ * - accepts all theme mixins as props
+ * - has helpers for truncating text to a set line count
+ * - by default, retains newlines (for rendering text from an API response)
+ */
 export const Text = styled.span<_TextProps>`
   color: inherit;
 

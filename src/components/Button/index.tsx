@@ -11,6 +11,7 @@ interface _ButtonProps extends ThemeMixinProps {
 
 export type ButtonProps = StyledComponentProps<typeof Button>;
 
+/** A simple button component with basic default styles. */
 export const Button = styled.button<_ButtonProps>`
   align-items: center;
   appearance: none;

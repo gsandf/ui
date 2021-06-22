@@ -15,7 +15,7 @@ export const BasicUsage: Story<void> = () => {
       <div>
         <Box>Value stored in localStorage: {value}</Box>
 
-        <HStack $py={3} $justify="space-between">
+        <HStack $py={3} justify="space-between">
           <Button onClick={() => setValue(value => value - 1)}>-</Button>
           <Button onClick={() => setValue(0)}>Reset</Button>
           <Button onClick={() => setValue(value => value + 1)}>+</Button>

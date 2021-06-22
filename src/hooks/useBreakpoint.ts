@@ -4,6 +4,10 @@ import { useMediaQuery } from './useMediaQuery';
 export type BreakpointKey = keyof DefaultTheme['breakpoints'] | 'base';
 export type BreakPointFilter = (keyof DefaultTheme['breakpoints'])[];
 
+/**
+ * Returns the name of the current breakpoint. If `breakpointFilter` is given,
+ * returns the name of the largest breakpoint that matches the current window.
+ */
 export function useBreakpoint(
   breakpointFilter?: BreakPointFilter
 ): BreakpointKey {

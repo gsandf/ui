@@ -11,6 +11,10 @@ const DEFAULT_DEBOUNCE_TIME = 60;
 
 type SetValue<Value> = Dispatch<SetStateAction<Value>>;
 
+/**
+ * Saves a value like `useState`, but delays setting the value until `delay`
+ * milliseconds has passed.
+ */
 export function useDebouncedState<Value>(
   initialValue: Value,
   delay: number = DEFAULT_DEBOUNCE_TIME

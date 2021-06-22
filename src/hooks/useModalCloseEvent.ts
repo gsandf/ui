@@ -9,7 +9,7 @@ export interface Options {
 }
 
 /**
- * Calls the given `onClose` function when a common event outside the modal
+ * Calls the given `onClose` function when a common event outside a modal
  * should trigger a close. For example, this can handle when the Escape key is
  * pressed and when the modal is clicked outside.
  */

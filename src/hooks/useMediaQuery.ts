@@ -3,6 +3,9 @@ import { isBrowser, noop } from '../utils';
 
 const isSupported = isBrowser && 'matchMedia' in window;
 
+/**
+ * Detects when a media query matches the current window.
+ */
 export function useMediaQuery(query: string): boolean {
   const [doesMatch, setDoesMatch] = useState(
     isSupported ? matchMedia(query).matches : false

@@ -4,6 +4,9 @@ import {
   useBreakpoint
 } from './useBreakpoint';
 
+/**
+ * Returns a value based on the current window size.
+ */
 export function useBreakpointValue<T>(
   breakpointValues: Partial<Record<BreakpointKey, T>>
 ): T {

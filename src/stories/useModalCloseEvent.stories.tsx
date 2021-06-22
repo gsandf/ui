@@ -42,7 +42,7 @@ export const BasicUsage = () => {
             dialog
           </Box>
 
-          <HStack $pt={4} $justify="space-around" $width="full">
+          <HStack $pt={4} justify="space-around" $width="full">
             <Button>Do-nothing button</Button>
             <Button onClick={triggerClose}>Close</Button>
           </HStack>

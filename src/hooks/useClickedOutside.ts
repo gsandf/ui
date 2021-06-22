@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 type PressEvent = MouseEvent | TouchEvent;
 
 /**
- * Handles click events outside a DOM element, like a div. A handler function
+ * Handles click events outside a DOM element, like a `div`. A handler function
  * is invoked when a click or touch event happens outside the referenced
  * element.
  */
