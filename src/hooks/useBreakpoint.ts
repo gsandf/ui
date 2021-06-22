@@ -1,7 +1,7 @@
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useMediaQuery } from './useMediaQuery';
 
-type BreakpointKey = keyof DefaultTheme['breakpoints'] | undefined;
+type BreakpointKey = keyof DefaultTheme['breakpoints'] | 'base';
 
 export function useBreakpoint() {
   const { breakpoints } = useTheme();
@@ -17,5 +17,5 @@ export function useBreakpoint() {
   // Return the first breakpoint that's active
   const activeIndex = listeners.findIndex(Boolean);
 
-  return breakpointNames[activeIndex] as BreakpointKey;
+  return (breakpointNames[activeIndex] ?? 'base') as BreakpointKey;
 }
