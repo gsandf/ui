@@ -1,5 +1,6 @@
 import { hideVisually } from 'polished';
-import styled, { css } from 'styled-components';
+import { ReactNode } from 'react';
+import styled, { css, DefaultTheme } from 'styled-components';
 import type {
   ResponsiveProperty,
   ResponsiveRule,
@@ -37,6 +38,39 @@ export const Center = styled(Flex)`
 /** Hides content visually but remains accessible to screen readers. */
 export const ScreenReaderContent = styled(Box)`
   ${hideVisually()}
+`;
+
+export type HideProps = {
+  above?: keyof DefaultTheme['breakpoints'];
+  below?: keyof DefaultTheme['breakpoints'];
+  children: ReactNode;
+  query?: string;
+};
+
+export const Hide = styled(Box)<HideProps>`
+  ${p =>
+    p.above &&
+    css`
+      ${p.theme.media.up[p.above]} {
+        display: none;
+      }
+    `}
+
+  ${p =>
+    p.below &&
+    css`
+      ${p.theme.media.down[p.below]} {
+        display: none;
+      }
+    `}
+
+  ${p =>
+    p.query &&
+    css`
+      @media ${p.query} {
+        display: none;
+      }
+    `}
 `;
 
 interface StackProps extends ThemeMixinProps {
