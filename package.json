@@ -7,7 +7,7 @@
   "exports": "./dist/gsandf-ui.modern.js",
   "module": "dist/gsandf-ui.esm.js",
   "unpkg": "dist/gsandf-ui.umd.js",
-  "types": "dist/gsandf-ui.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/**"
   ],
