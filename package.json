@@ -3,10 +3,16 @@
   "version": "0.0.1-2",
   "description": "TODO: add description",
   "source": "src/index.ts",
-  "main": "dist/gsandf-ui.cjs.js",
-  "exports": "./dist/gsandf-ui.modern.js",
+  "main": "dist/gsandf-ui.js",
+  "jsnext:main": "./dist/gsandf-ui.modern.js",
+  "exports": {
+    ".": {
+      "browser": "./dist/gsandf-ui.modern.js",
+      "import": "./dist/gsandf-ui.modern.js",
+      "require": "./dist/gsandf-ui.js"
+    }
+  },
   "module": "dist/gsandf-ui.esm.js",
-  "unpkg": "dist/gsandf-ui.umd.js",
   "type": "module",
   "types": "dist/index.d.ts",
   "files": [
@@ -84,7 +90,7 @@
     "styled-components": "^5.3.0"
   },
   "scripts": {
-    "build": "microbundle --no-compress",
+    "build": "microbundle --no-compress -f cjs,esm,modern",
     "dev": "yarn storybook",
     "format-check": "amper-scripts format-check '*.{js,ts,tsx}' 'src/**/*.{js,ts,tsx}'",
     "format": "amper-scripts format-write '*.{js,ts,tsx}' 'src/**/*.{js,ts,tsx}'",
