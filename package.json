@@ -13,7 +13,6 @@
     }
   },
   "module": "dist/gsandf-ui.esm.js",
-  "type": "module",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**"
