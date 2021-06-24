@@ -42,7 +42,9 @@ export const breakpoints = {
   xxl: 1440
 };
 
-export const borders = {};
+export const borders = {
+  none: '0px solid transparent'
+};
 
 export const fonts = {
   body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
