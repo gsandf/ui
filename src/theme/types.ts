@@ -109,26 +109,21 @@ export type ComponentStyles = Record<
 >;
 
 export interface CustomTheme {
-  readonly borders?: Record<string, CSSProperties['border']>;
-  readonly breakpoints?: Record<string, number>;
-  readonly colors?: Record<string, CSSProperties['backgroundColor']>;
-  readonly components?: ComponentStyles;
-  readonly fonts?: Record<string, CSSProperties['fontFamily']>;
-  readonly fontSizes?: CSSProperties['fontSize'][];
-  readonly fontWeights?: Record<string, CSSProperties['fontWeight']>;
-  readonly lineHeights?: Record<string, CSSProperties['lineHeight']>;
-  readonly radii?: Record<string, CSSProperties['borderRadius']>;
-  readonly shadows?: Record<string, CSSProperties['boxShadow']>;
-  readonly sizes?: Record<string | number, string>;
-  readonly space?: (string | number)[] | Record<string | number, string>;
-  readonly styles?:
-    | GlobalStyleComponent<unknown, unknown>
-    | (() => ReactElement);
-  readonly transitions?: GlobalStyleComponent<
-    unknown,
-    CSSProperties['transition']
-  >;
-  readonly zIndices?: Record<string, CSSProperties['zIndex']>;
+  borders?: Record<string, CSSProperties['border']>;
+  breakpoints?: Record<string, number>;
+  colors?: Record<string, CSSProperties['backgroundColor']>;
+  components?: ComponentStyles;
+  fonts?: Record<string, CSSProperties['fontFamily']>;
+  fontSizes?: CSSProperties['fontSize'][];
+  fontWeights?: Record<string, CSSProperties['fontWeight']>;
+  lineHeights?: Record<string, CSSProperties['lineHeight']>;
+  radii?: Record<string, CSSProperties['borderRadius']>;
+  shadows?: Record<string, CSSProperties['boxShadow']>;
+  sizes?: Record<string | number, string>;
+  space?: (string | number)[] | Record<string | number, string>;
+  styles?: GlobalStyleComponent<unknown, unknown> | (() => ReactElement);
+  transitions?: GlobalStyleComponent<unknown, CSSProperties['transition']>;
+  zIndices?: Record<string, CSSProperties['zIndex']>;
 }
 
 export interface ThemeMixinProps
