@@ -31,18 +31,10 @@ export function createTheme<T extends CustomTheme>(
 
   const mixins = createMixins(media);
 
-  const createdTheme = {
+  return {
     ...defaultTheme,
+    ...theme,
     media,
     mixins
-  } as Partial<CustomTheme>;
-
-  for (const prop in theme) {
-    createdTheme[prop as keyof CustomTheme] = {
-      ...defaultTheme[prop as keyof CustomTheme],
-      ...theme[prop]
-    };
-  }
-
-  return createdTheme as CreatedTheme<DefaultTheme & T>;
+  };
 }
