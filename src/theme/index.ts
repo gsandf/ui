@@ -14,13 +14,17 @@ export type CreatedTheme<T extends CustomTheme> = Readonly<
   }
 >;
 
-export interface Theme extends CreatedTheme<typeof defaultTheme> {}
+type DefaultTheme = typeof defaultTheme;
+
+export interface Theme extends CreatedTheme<DefaultTheme> {}
 
 declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
 }
 
-export function createTheme<T extends CustomTheme>(theme: T): CreatedTheme<T> {
+export function createTheme<T extends CustomTheme>(
+  theme: T
+): CreatedTheme<DefaultTheme & T> {
   const media = createMediaQueries(theme.breakpoints);
   const mixins = createMixins(media);
 
@@ -37,5 +41,5 @@ export function createTheme<T extends CustomTheme>(theme: T): CreatedTheme<T> {
     };
   }
 
-  return createdTheme as CreatedTheme<T>;
+  return createdTheme as CreatedTheme<DefaultTheme & T>;
 }
