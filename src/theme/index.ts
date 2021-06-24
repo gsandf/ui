@@ -25,7 +25,10 @@ declare module 'styled-components' {
 export function createTheme<T extends CustomTheme>(
   theme: T
 ): CreatedTheme<DefaultTheme & T> {
-  const media = createMediaQueries(theme.breakpoints);
+  const media = createMediaQueries(
+    theme?.breakpoints ?? defaultTheme.breakpoints
+  );
+
   const mixins = createMixins(media);
 
   const createdTheme = {
