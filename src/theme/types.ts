@@ -129,7 +129,6 @@ export interface CustomTheme {
     CSSProperties['transition']
   >;
   readonly zIndices?: Record<string, CSSProperties['zIndex']>;
-  [x: string]: unknown;
 }
 
 export interface ThemeMixinProps

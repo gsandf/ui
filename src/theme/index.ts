@@ -11,7 +11,7 @@ export type CreatedTheme<T extends CustomTheme> = T & {
   mixins: ReturnType<typeof createMixins>;
 };
 
-export interface Theme extends CreatedTheme<typeof defaultTheme> {}
+export interface Theme extends CreatedTheme<CustomTheme> {}
 
 declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
