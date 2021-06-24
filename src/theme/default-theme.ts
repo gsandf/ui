@@ -42,12 +42,7 @@ export const breakpoints = {
   xxl: 1440
 };
 
-export const borders = {
-  card: `1px solid ${colors.gray800}`,
-  control: `1px solid ${colors.gray700}`,
-  controlActive: `2px solid ${colors.primary}`,
-  thick: `8px solid ${colors.dark}`
-};
+export const borders = {};
 
 export const fonts = {
   body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
@@ -70,9 +65,8 @@ export const fontSizes = [
 
 export const fontWeights = {
   body: 400,
-  button: 700,
-  heading: 700,
-  display: 700
+  control: 700,
+  heading: 700
 };
 
 export const lineHeights = {
@@ -81,11 +75,7 @@ export const lineHeights = {
   heading: 1.3
 };
 
-export const radii = {
-  none: '0',
-  sm: '4px',
-  md: '8px'
-};
+export const radii = {};
 
 export const sizes = {
   '0': '0',
@@ -162,13 +152,7 @@ export const space = {
   128: '32rem'
 };
 
-export const shadows = {
-  default: `0 2px 10px 0 rgba(0,0,0,0.13);`,
-  nav: `0 1px 0 0 ${colors.gray800}`,
-  none: 'none',
-  outline: `0 0 0 2px ${colors.primary}`,
-  thinOutline: `0 0 0 1px ${colors.gray700}`
-};
+export const shadows = {};
 
 export const textStyles = {
   default: {
@@ -240,23 +224,6 @@ export const styles = createGlobalStyle`
     padding-bottom: ${space[2]};
   }
 
-  input:not([class]) {
-    border: ${borders.control};
-    border-radius: ${radii.sm};
-    display: block;
-    outline: none;
-    padding-bottom: ${space[2]};
-    padding-left: ${space[3]};
-    padding-right: ${space[3]};
-    padding-top: ${space[2]};
-    width: 100%;
-
-    :focus {
-      border-color: transparent;
-      box-shadow: ${shadows.outline};
-    }
-  }
-
   code, pre {
     font-family: ${fonts.monospace};
   }
@@ -265,20 +232,16 @@ export const styles = createGlobalStyle`
 export const components: ComponentStyles = {
   Button: {
     baseStyle: css`
-      border: ${borders.control};
-      border-radius: ${radii.md};
-      font-weight: 700;
-      line-height: 1.2;
+      background-color: ${p => p.theme.colors.darken};
+      border: 0px solid ${p => p.theme.colors.darken};
+      font-weight: ${p => p.theme.fontWeights.control};
+      line-height: ${p => p.theme.lineHeights.control};
       padding: ${space[2]} ${space[3]};
       transition: all 250ms;
 
       :disabled {
         cursor: not-allowed;
         opacity: 0.4;
-      }
-
-      :focus:not(:disabled) {
-        box-shadow: ${shadows.default};
       }
     `,
     variants: {
