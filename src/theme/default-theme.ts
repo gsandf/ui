@@ -75,7 +75,11 @@ export const lineHeights = {
   heading: 1.3
 };
 
-export const radii = {};
+export const radii = {
+  none: '0',
+  sm: '4px',
+  md: '8px'
+};
 
 export const sizes = {
   '0': '0',
