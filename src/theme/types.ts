@@ -121,7 +121,9 @@ export interface CustomTheme {
   readonly shadows?: Record<string, CSSProperties['boxShadow']>;
   readonly sizes?: Record<string | number, string>;
   readonly space?: (string | number)[] | Record<string | number, string>;
-  readonly styles?: ReactElement; //GlobalStyleComponent<unknown, unknown>;
+  readonly styles?:
+    | GlobalStyleComponent<unknown, unknown>
+    | (() => ReactElement);
   readonly transitions?: GlobalStyleComponent<
     unknown,
     CSSProperties['transition']
