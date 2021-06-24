@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 import { CSSProp, DefaultTheme, GlobalStyleComponent } from 'styled-components';
 
 export type ResponsiveRule<T> = T | T[];
@@ -121,7 +121,7 @@ export interface CustomTheme {
   readonly shadows?: Record<string, CSSProperties['boxShadow']>;
   readonly sizes?: Record<string | number, string>;
   readonly space?: (string | number)[] | Record<string | number, string>;
-  readonly styles?: GlobalStyleComponent<unknown, unknown>;
+  readonly styles?: ReactElement; //GlobalStyleComponent<unknown, unknown>;
   readonly transitions?: GlobalStyleComponent<
     unknown,
     CSSProperties['transition']

@@ -195,7 +195,7 @@ export const zIndices = {
   menu: 90
 };
 
-export const styles: GlobalStyleComponent<unknown, unknown> = createGlobalStyle`
+export const styles = createGlobalStyle`
   ${normalize()}
 
   *, *::after, *::before {
