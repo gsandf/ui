@@ -1,9 +1,5 @@
 import { normalize } from 'polished';
-import {
-  createGlobalStyle,
-  css,
-  GlobalStyleComponent
-} from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import { ComponentStyles } from './types';
 
 const palette = {
