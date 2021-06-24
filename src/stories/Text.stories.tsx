@@ -20,6 +20,7 @@ export default {
       ] as CSSProperties['textTransform'][],
       control: 'radio'
     },
+    as: { control: 'text' },
     maxLineCount: {
       defaultvalue: undefined,
       control: 'number'
