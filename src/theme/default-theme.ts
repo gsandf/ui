@@ -1,6 +1,6 @@
 import { normalize } from 'polished';
 import { createGlobalStyle, css } from 'styled-components';
-import { ComponentStyles } from './types';
+import type { ComponentStyles } from './types';
 
 const palette = {
   red: '#e45b66',

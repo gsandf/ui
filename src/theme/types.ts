@@ -1,6 +1,22 @@
 import React, { CSSProperties, ReactElement } from 'react';
 import { CSSProp, DefaultTheme, GlobalStyleComponent } from 'styled-components';
 
+type CustomMediaQuery = {
+  from: (x: number) => string;
+};
+
+type MediaQuerySet<B extends Breakpoints> = Record<keyof B, string> &
+  CustomMediaQuery;
+
+export interface MediaQueries<B extends Breakpoints> {
+  down: MediaQuerySet<B>;
+  up: MediaQuerySet<B>;
+}
+
+export interface Breakpoints {
+  [x: string]: number;
+}
+
 export type ResponsiveRule<T> = T | T[];
 
 /**

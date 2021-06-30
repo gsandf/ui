@@ -1,18 +1,4 @@
-export interface Breakpoints {
-  [x: string]: number;
-}
-
-type CustomMediaQuery = {
-  from: (x: number) => string;
-};
-
-type MediaQuerySet<B extends Breakpoints> = Record<keyof B, string> &
-  CustomMediaQuery;
-
-export interface MediaQueries<B extends Breakpoints> {
-  down: MediaQuerySet<B>;
-  up: MediaQuerySet<B>;
-}
+import type { Breakpoints, MediaQueries } from './types';
 
 const createMaxWidthQuery = (maxWidth: number) =>
   `@media (max-width: ${maxWidth}px)`;

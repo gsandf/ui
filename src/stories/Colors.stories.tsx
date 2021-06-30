@@ -1,29 +1,26 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
+import { BasicGrid } from '../components/Layout/BasicGrid';
 
 export default {
   title: 'Theme/Colors'
 };
 
-const ColorPalette = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1em;
-`;
-
 const SpecimenColor = styled.div<{ color: string }>`
   background-color: ${p => p.color};
-  min-height: ${p => p.theme.space[6]};
-  min-width: ${p => p.theme.space[6]};
+  min-height: ${p => p.theme.space[16]};
+  min-width: ${p => p.theme.space[16]};
 `;
 
 const SpecimenLabel = styled.div`
-  border-top: ${p => p.theme.borders.card};
+  border-top-color: ${p => p.theme.colors.gray700};
+  border-top-style: solid;
+  border-top-width: 1px;
   padding: ${p => p.theme.space[2]};
 `;
 
 const Specimen = styled.div`
-  box-shadow: ${p => p.theme.shadows.default};
+  box-shadow: 0 0 8px 0 ${p => p.theme.colors.gray700};
   display: flex;
   flex-direction: column;
 `;
@@ -49,7 +46,7 @@ export const Colors = () => {
   }
 
   return (
-    <ColorPalette>
+    <BasicGrid columns={3} spacing="1.5em">
       {getColorNames().map(({ color, names }) => (
         <Specimen>
           <SpecimenColor color={color} />
@@ -60,6 +57,6 @@ export const Colors = () => {
           </SpecimenLabel>
         </Specimen>
       ))}
-    </ColorPalette>
+    </BasicGrid>
   );
 };

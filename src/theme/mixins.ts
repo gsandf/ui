@@ -1,10 +1,9 @@
 import { get, getOr } from '@blakek/deep';
 import { css, CSSProp } from 'styled-components';
-import type { CreatedTheme } from '.';
 import { omit } from '../utils';
-import { ResponsiveRule } from './types';
+import type { Breakpoints, MediaQueries, ResponsiveRule } from './types';
 
-export function createMixins(media: CreatedTheme<unknown>['media']) {
+export function createMixins(media: MediaQueries<Breakpoints>) {
   const mediaQueries = Object.values(omit(media.up, 'from'));
 
   function mapResponsive<T>(
