@@ -1,6 +1,10 @@
 import { hideVisually } from 'polished';
 import styled, { css } from 'styled-components';
-import type { ResponsiveProperty, ThemeMixinProps } from '../../theme';
+import type {
+  ResponsiveProperty,
+  ResponsiveRule,
+  ThemeMixinProps
+} from '../../theme';
 import { ensureUnit } from '../../utils';
 
 /**
