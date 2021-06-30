@@ -37,7 +37,9 @@ export const Text = styled.span<_TextProps>`
 
 export type TextProps = StyledComponentProps<typeof Text>;
 
-export type MailToProps = TextProps;
+export interface MailToProps extends TextProps {
+  children: string;
+}
 
 export const MailTo = ({ children, ...props }: MailToProps) => (
   <Text as="a" href={`mailto:${children}`} {...props}>
@@ -46,11 +48,12 @@ export const MailTo = ({ children, ...props }: MailToProps) => (
 );
 
 export interface TelProps extends TextProps {
+  children: string;
   getFormatted?: (phoneNumber: string) => string;
 }
 
 export const Tel = ({ children, getFormatted, ...props }: TelProps) => (
   <Text as="a" href={`tel:${children}`} {...props}>
-    {getFormatted ? getFormatted(children as string) : children}
+    {getFormatted ? getFormatted(children) : children}
   </Text>
 );

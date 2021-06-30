@@ -44,8 +44,12 @@ export function createMixins(media: CreatedTheme<unknown>['media']) {
     themePath: string,
     prop: string
   ) {
-    function createRule(props: any): CSSProp {
-      const propValue = get(prop, props) as unknown;
+    function createRule(props?: Record<string, unknown>): CSSProp {
+      const propValue = get(prop, props) as
+        | number
+        | string
+        | (number | string)[]
+        | undefined;
 
       // Don't create any rules if no value was supplied
       if (propValue === undefined || propValue === null) return '';
