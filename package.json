@@ -1,6 +1,6 @@
 {
   "name": "@gsandf/ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TODO: add description",
   "source": "src/index.ts",
   "main": "dist/gsandf-ui.js",
