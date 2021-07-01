@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme, ThemeProps } from 'styled-components';
 import { ResponsiveProperty, ResponsiveRule } from '../../theme';
 import { Flex } from './Flex';
 
-export type BasicGridProps = {
+export interface BasicGridProps extends ThemeProps<DefaultTheme> {
   /** Set the number of columns directly */
   columns?: ResponsiveRule<number>;
   /** Set the number of columns based on a required width for children */
@@ -13,7 +13,37 @@ export type BasicGridProps = {
   spacingX?: ResponsiveProperty<'columnGap', 'space'>;
   /** The gap between children only in the vertical direction */
   spacingY?: ResponsiveProperty<'rowGap', 'space'>;
-};
+}
+
+function getGridColumns(props: BasicGridProps) {
+  const { mapResponsive } = props.theme.mixins;
+
+  // Handle set number of columns
+  if (props.columns !== undefined) {
+    return mapResponsive(
+      props.columns,
+      columnCount =>
+        css`
+          grid-template-columns: repeat(${columnCount}, minmax(0, 1fr));
+        `
+    );
+  }
+
+  // Handle minimum child width
+  if (props.minChildWidth !== undefined) {
+    return mapResponsive(
+      props.minChildWidth,
+      minWidth =>
+        css`
+          grid-template-columns: repeat(auto-fit, minmax(${minWidth}, 1fr));
+        `
+    );
+  }
+
+  return css`
+    grid-auto-columns: max-content;
+  `;
+}
 
 /**
  * A basic grid component that distributes its children evenly.
@@ -36,28 +66,5 @@ export const BasicGrid = styled(Flex)<BasicGridProps>`
     `;
   }}
 
-  ${p => {
-    const { mapResponsive } = p.theme.mixins;
-
-    if (p.columns) {
-      return mapResponsive(
-        p.columns,
-        columnCount =>
-          css`
-            grid-template-columns: repeat(${columnCount}, minmax(0, 1fr));
-          `
-      );
-    }
-
-    return mapResponsive(
-      p.minChildWidth,
-      minChildWidth =>
-        css`
-          grid-template-columns: repeat(
-            auto-fit,
-            minmax(${minChildWidth}, 1fr)
-          );
-        `
-    );
-  }}
+  ${getGridColumns}
 `;
