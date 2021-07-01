@@ -21,7 +21,7 @@ export const BasicUsageWithColumns: Story<BasicGridProps> = (
 ) => (
   <BasicGrid {...props}>
     {range(1, 10).map(index => (
-      <Box $bgColor="red" $color="white" $p="16">
+      <Box $bgColor="red" $color="white" $p="16" key={index}>
         Box {index}
       </Box>
     ))}
@@ -30,7 +30,7 @@ export const BasicUsageWithColumns: Story<BasicGridProps> = (
 
 BasicUsageWithColumns.args = {
   columns: 3,
-  spacing: 8
+  spacing: '8'
 };
 
 export const BasicUsageWithMinChildWidth: Story<BasicGridProps> = (
@@ -38,7 +38,7 @@ export const BasicUsageWithMinChildWidth: Story<BasicGridProps> = (
 ) => (
   <BasicGrid {...props}>
     {range(1, 10).map(index => (
-      <Box $bgColor="red" $color="white" $p="16">
+      <Box $bgColor="red" $color="white" $p="16" key={index}>
         Box {index}
       </Box>
     ))}
@@ -47,5 +47,5 @@ export const BasicUsageWithMinChildWidth: Story<BasicGridProps> = (
 
 BasicUsageWithMinChildWidth.args = {
   minChildWidth: '330px',
-  spacing: 8
+  spacing: '8'
 };

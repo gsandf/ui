@@ -22,7 +22,7 @@ BasicUsage.args = {
 
 export const ExampleWithImage: Story<AspectRatioProps> = props => (
   <AspectRatio {...props}>
-    <img src="https://source.unsplash.com/800x800?nature,water" />
+    <img alt="" src="https://source.unsplash.com/800x800?nature,water" />
   </AspectRatio>
 );
 
@@ -38,6 +38,7 @@ export const ExampleWithIFrameVideo: Story<AspectRatioProps> = props => (
       allowFullScreen
       frameBorder="0"
       src="https://www.youtube.com/embed/UiSB2Fbw9gs"
+      title="Video: The Midnight - Days of Thunder"
     />
   </AspectRatio>
 );

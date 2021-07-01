@@ -32,7 +32,7 @@ export function useDebouncedState<Value>(
         setValue(value);
       }, delay);
     },
-    [initialValue, delay]
+    [delay]
   );
 
   useEffect(() => {

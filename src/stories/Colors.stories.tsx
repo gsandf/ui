@@ -48,7 +48,7 @@ export const Colors = () => {
   return (
     <BasicGrid columns={3} spacing="1.5em">
       {getColorNames().map(({ color, names }) => (
-        <Specimen>
+        <Specimen key={color}>
           <SpecimenColor color={color} />
           <SpecimenLabel>
             {color}

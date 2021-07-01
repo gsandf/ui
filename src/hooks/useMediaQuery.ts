@@ -11,12 +11,9 @@ export function useMediaQuery(query: string): boolean {
     isSupported ? matchMedia(query).matches : false
   );
 
-  const changeListener = useCallback(
-    (event: MediaQueryListEvent) => {
-      setDoesMatch(event.matches);
-    },
-    [query]
-  );
+  const changeListener = useCallback((event: MediaQueryListEvent) => {
+    setDoesMatch(event.matches);
+  }, []);
 
   useEffect(() => {
     if (!isSupported) return noop;

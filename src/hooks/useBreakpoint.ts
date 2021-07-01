@@ -26,6 +26,7 @@ export function useBreakpoint(
     .reverse();
 
   const listeners = breakpointWidths.map(v =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useMediaQuery(`(min-width: ${v}px)`)
   );
 
