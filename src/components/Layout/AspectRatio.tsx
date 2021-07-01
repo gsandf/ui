@@ -26,7 +26,7 @@ export const AspectRatio = styled(Box)<AspectRatioProps>`
       p.theme.mixins.mapResponsive(
         p.ratio,
         ratio => css`
-          padding-bottom: calc(${(1 / ratio) * 100}%);
+          padding-bottom: ${(1 / ratio) * 100}%;
         `
       )}
   }
