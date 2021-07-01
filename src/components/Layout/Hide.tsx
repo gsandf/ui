@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
-import { Box } from './common';
+import { Box } from './Box';
 
 export type HideProps = {
   above?: keyof DefaultTheme['breakpoints'];

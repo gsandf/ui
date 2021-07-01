@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ResponsiveProperty, ResponsiveRule } from '../../theme';
-import { Flex } from './common';
+import { Flex } from './Flex';
 
 export type BasicGridProps = {
   /** Set the number of columns directly */

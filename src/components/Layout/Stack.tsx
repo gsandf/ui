@@ -1,46 +1,6 @@
-import { hideVisually } from 'polished';
 import styled, { css } from 'styled-components';
-import type {
-  ResponsiveProperty,
-  ResponsiveRule,
-  ThemeMixinProps
-} from '../../theme';
-import { ensureUnit } from '../../utils';
-
-/**
- * A simple box. By default, it renders a `<div />`. It can be useful as a base
- * to create other components from as it accepts all theme mixins as props.
- */
-export const Box = styled.div<ThemeMixinProps>`
-  display: block;
-  flex-grow: 0;
-  margin: 0;
-  min-width: 0;
-  ${p => p.theme.mixins.themeMixin}
-`;
-
-/** Constrains content width with a default max size (override with `$maxWidth`). */
-export const Container = styled(Box)`
-  margin: 0 auto;
-  max-width: ${p => ensureUnit(p.$maxWidth ?? p.theme.breakpoints.xl)};
-  width: 100%;
-`;
-
-/** A box with `display: flex` */
-export const Flex = styled(Box)`
-  display: flex;
-`;
-
-/** A Flex with flex properties set to center content. */
-export const Center = styled(Flex)`
-  align-items: center;
-  justify-content: center;
-`;
-
-/** Hides content visually but remains accessible to screen readers. */
-export const ScreenReaderContent = styled(Box)`
-  ${hideVisually()}
-`;
+import type { ResponsiveProperty, ThemeMixinProps } from '../../theme';
+import { Flex } from './Flex';
 
 export interface StackProps extends ThemeMixinProps {
   align?: ResponsiveProperty<'alignItems'>;

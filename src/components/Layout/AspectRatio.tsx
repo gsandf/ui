@@ -2,7 +2,7 @@ import { cover } from 'polished';
 import { ReactChild } from 'react';
 import styled, { css } from 'styled-components';
 import type { ResponsiveRule, ThemeMixinProps } from '../../theme';
-import { Box } from './common';
+import { Box } from './Box';
 
 export interface AspectRatioProps extends ThemeMixinProps {
   children: ReactChild;
