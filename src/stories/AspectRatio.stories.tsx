@@ -8,12 +8,15 @@ export default {
 } as Meta<AspectRatioProps>;
 
 export const BasicUsage: Story<AspectRatioProps> = props => (
-  <AspectRatio {...props} />
+  <AspectRatio {...props}>
+    <div>This is a box with a set aspect ratio</div>
+  </AspectRatio>
 );
 
 BasicUsage.args = {
   ratio: 16 / 9,
   $bgColor: 'tomato',
+  $color: 'white',
   $maxWidth: '300px'
 };
 
@@ -24,7 +27,25 @@ export const ExampleWithImage: Story<AspectRatioProps> = props => (
 );
 
 ExampleWithImage.args = {
-  ratio: 16 / 9,
-  $bgColor: 'tomato',
-  $maxWidth: '300px'
+  ratio: 4 / 3,
+  $bgColor: 'gray800',
+  $maxWidth: '700px'
 };
+
+export const ExampleWithIFrameVideo: Story<AspectRatioProps> = props => (
+  <AspectRatio {...props}>
+    <iframe
+      allowFullScreen
+      frameBorder="0"
+      src="https://www.youtube.com/embed/UiSB2Fbw9gs"
+    />
+  </AspectRatio>
+);
+
+ExampleWithIFrameVideo.args = {
+  ratio: 16 / 9,
+  $bgColor: 'black',
+  $maxWidth: '800px'
+};
+
+ExampleWithIFrameVideo.storyName = 'Example With iframe Video';
