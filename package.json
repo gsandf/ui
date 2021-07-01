@@ -77,6 +77,7 @@
     "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "styled-components": "^5.3.0",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
@@ -87,7 +88,9 @@
     "styled-components": "^5.3.0"
   },
   "scripts": {
-    "build": "microbundle --no-compress -f cjs,esm,modern",
+    "build": "run-s build:clean build:compile",
+    "build:clean": "rimraf dist",
+    "build:compile": "microbundle --no-compress -f cjs,esm,modern",
     "dev": "yarn storybook",
     "format-check": "amper-scripts format-check '*.{js,ts,tsx}' 'src/**/*.{js,ts,tsx}'",
     "format": "amper-scripts format-write '*.{js,ts,tsx}' 'src/**/*.{js,ts,tsx}'",
