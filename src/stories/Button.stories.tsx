@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { Button, ButtonProps } from '../components/Button';
+import { BasicGrid, Button, ButtonProps } from '../components';
 
 export default {
   title: 'Controls/Button',
@@ -24,13 +24,7 @@ Default.args = {
 export const Colors: Story<Omit<ButtonProps, '$bgColor' | '$bg' | '$color'>> = (
   props: ButtonProps
 ) => (
-  <div
-    style={{
-      display: 'grid',
-      gap: '1em',
-      gridAutoColumns: 'max-content'
-    }}
-  >
+  <BasicGrid spacing={4}>
     <Button {...props}>Default</Button>
 
     <Button {...props} $bgColor="primary" $color="onPrimary">
@@ -48,15 +42,15 @@ export const Colors: Story<Omit<ButtonProps, '$bgColor' | '$bg' | '$color'>> = (
     <Button {...props} $bgColor="red" $color="textLight">
       Red
     </Button>
-  </div>
+  </BasicGrid>
 );
 
 export const AsAnchor: Story<unknown> = () => (
-  <>
+  <BasicGrid spacing={4}>
     <Button>I’m a button</Button>
 
     <Button as="a" href="#">
       I’m an anchor
     </Button>
-  </>
+  </BasicGrid>
 );
