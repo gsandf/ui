@@ -90,7 +90,7 @@
   "scripts": {
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf dist",
-    "build:compile": "microbundle --no-compress -f cjs,esm,modern",
+    "build:compile": "microbundle --format cjs,esm,modern",
     "dev": "yarn storybook",
     "format-check": "amper-scripts format-check .",
     "format": "amper-scripts format-write .",
