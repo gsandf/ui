@@ -60,9 +60,9 @@ export const BasicGrid = styled(Flex)<BasicGridProps>`
     const { createRuleForProp } = p.theme.mixins;
 
     return css`
-      ${createRuleForProp('gap', 'theme.space', 'spacing')}
-      ${createRuleForProp('column-gap', 'theme.space', 'spacingX')}
-      ${createRuleForProp('row-gap', 'theme.space', 'spacingY')}
+      ${createRuleForProp('spacing', 'gap', 'space')}
+      ${createRuleForProp('spacingX', 'column-gap', 'space')}
+      ${createRuleForProp('spacingY', 'row-gap', 'space')}
     `;
   }}
 

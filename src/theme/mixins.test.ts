@@ -190,12 +190,10 @@ test('passes breakpoint name to `mapResponsive` callback', t => {
 test('creates mixin to easily add style props', t => {
   const media = getDefaultMedia();
   const mixins = createMixins(media);
-  const { createRuleForPropV2 } = mixins;
+  const { createRuleForProp } = mixins;
 
   t.is(
-    getStyleString(
-      createRuleForPropV2('w', 'width')(createProps({ w: '5px' }))
-    ),
+    getStyleString(createRuleForProp('w', 'width')(createProps({ w: '5px' }))),
     getStyleString(css`
       width: 5px;
     `)
@@ -203,7 +201,7 @@ test('creates mixin to easily add style props', t => {
 
   t.is(
     getStyleString(
-      createRuleForPropV2(
+      createRuleForProp(
         'w',
         'width'
       )(createProps({ w: ['1px', '2px', , '4px'] }))
@@ -223,7 +221,7 @@ test('creates mixin to easily add style props', t => {
 
   t.is(
     getStyleString(
-      createRuleForPropV2('px', ['padding-left', 'padding-right'])(
+      createRuleForProp('px', ['padding-left', 'padding-right'])(
         createProps({ px: ['1px', , '4px'] })
       )
     ),
@@ -242,11 +240,11 @@ test('creates mixin to easily add style props', t => {
 test('`createRuleForProp` uses themed values', t => {
   const media = getDefaultMedia();
   const mixins = createMixins(media);
-  const { createRuleForPropV2 } = mixins;
+  const { createRuleForProp } = mixins;
 
   t.is(
     getStyleString(
-      createRuleForPropV2(
+      createRuleForProp(
         'w',
         'width',
         'sizes'
@@ -263,7 +261,7 @@ test('`createRuleForProp` uses themed values', t => {
 
   t.is(
     getStyleString(
-      createRuleForPropV2('w', 'width', ['space', 'sizes'])(
+      createRuleForProp('w', 'width', ['space', 'sizes'])(
         createProps({ w: '5' })
       )
     ),
@@ -274,7 +272,7 @@ test('`createRuleForProp` uses themed values', t => {
 
   t.is(
     getStyleString(
-      createRuleForPropV2('w', 'width', ['space', 'sizes'])(
+      createRuleForProp('w', 'width', ['space', 'sizes'])(
         createProps({ w: '1/2' })
       )
     ),
@@ -285,7 +283,23 @@ test('`createRuleForProp` uses themed values', t => {
 
   t.is(
     getStyleString(
-      createRuleForPropV2('br', 'border-radius', ['radii', 'sizes'])(
+      createRuleForProp(
+        'gap',
+        ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'],
+        ['space', 'sizes']
+      )(createProps({ gap: 'sm' }))
+    ),
+    getStyleString(css`
+      margin-top: 4rem;
+      margin-right: 4rem;
+      margin-bottom: 4rem;
+      margin-left: 4rem;
+    `)
+  );
+
+  t.is(
+    getStyleString(
+      createRuleForProp('br', 'border-radius', ['radii', 'sizes'])(
         createProps({ br: 'sm' })
       )
     ),

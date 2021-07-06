@@ -1,4 +1,4 @@
-import { get, getOr } from '@blakek/deep';
+import { getOr } from '@blakek/deep';
 import { css, CSSProp, DefaultTheme } from 'styled-components';
 import { omit } from '../utils';
 import type { Breakpoints, MediaQueries, ResponsiveRule } from './types';
@@ -40,7 +40,7 @@ export function createMixins(media: MediaQueries<Breakpoints>) {
     `;
   }
 
-  function createRuleForPropV2(
+  function createRuleForProp(
     prop: string,
     ruleName: string | string[],
     themePath?: keyof DefaultTheme | (keyof DefaultTheme)[]
@@ -70,148 +70,91 @@ export function createMixins(media: MediaQueries<Breakpoints>) {
     };
   }
 
-  function createRuleForProp(
-    ruleName: string,
-    themePath: string,
-    prop: string
-  ) {
-    function createRule(props?: Record<string, unknown>): CSSProp {
-      const propValue = get(prop, props) as
-        | number
-        | string
-        | (number | string)[]
-        | undefined;
-
-      // Don't create any rules if no value was supplied
-      if (propValue === undefined || propValue === null) return '';
-
-      // An array means create breakpoints
-      if (Array.isArray(propValue)) {
-        const [defaultStyle, ...otherStyles] = propValue;
-
-        const breakpointStyles = otherStyles.flatMap((style, index) => {
-          const styles = createRule({ ...props, [prop]: style });
-
-          if (!styles) return [];
-
-          return css`
-            ${mediaQueries[index][1]} {
-              ${styles}
-            }
-          `;
-        });
-
-        return css`
-          ${createRule({ ...props, [prop]: defaultStyle })}
-          ${breakpointStyles}
-        `;
-      }
-
-      // Try and get a value from the theme to apply. Otherwise, use the value
-      // supplied directly.
-      const value = getOr(propValue, `${themePath}.${propValue}`, props);
-
-      return `${ruleName}: ${value};`;
-    }
-
-    return createRule;
-  }
-
-  // TODO: Consider extracting these out and creating an wrapper for
-  // `createRuleForProps` that acccepts an array of objects containing the CSS
-  // rule, prop name, and theme fallback
   const boxMixins = css`
-    ${createRuleForProp('display', '', '$display')}
-    ${createRuleForProp('position', '', '$position')}
+    ${createRuleForProp('$display', 'display')}
+    ${createRuleForProp('$position', 'position')}
   `;
 
   const flexChildMixin = css`
-    ${createRuleForProp('align-self', '', '$alignSelf')}
-    ${createRuleForProp('flex-basis', 'theme.sizes', '$basis')}
-    ${createRuleForProp('flex-grow', '', '$grow')}
-    ${createRuleForProp('flex-shrink', '', '$shrink')}
-    ${createRuleForProp('flex', '', '$flex')}
-    ${createRuleForProp('justify-self', '', '$justifySelf')}
+    ${createRuleForProp('$alignSelf', 'align-self')}
+    ${createRuleForProp('$basis', 'flex-basis', 'sizes')}
+    ${createRuleForProp('$grow', 'flex-grow')}
+    ${createRuleForProp('$shrink', 'flex-shrink')}
+    ${createRuleForProp('$flex', 'flex')}
+    ${createRuleForProp('$justifySelf', 'justify-self')}
   `;
 
   const flexContainerMixin = css`
-    ${createRuleForProp('align-items', '', '$alignItems')}
-    ${createRuleForProp('flex-direction', '', '$direction')}
-    ${createRuleForProp('flex-direction', '', '$flexDirection')}
-    ${createRuleForProp('flex-wrap', '', '$wrap')}
-    ${createRuleForProp('justify-content', '', '$justifyContent')}
+    ${createRuleForProp('$alignItems', 'align-items')}
+    ${createRuleForProp('$direction', 'flex-direction')}
+    ${createRuleForProp('$flexDirection', 'flex-direction')}
+    ${createRuleForProp('$wrap', 'flex-wrap')}
+    ${createRuleForProp('$justifyContent', 'justify-content')}
   `;
 
   const themeBordersMixin = css`
-    ${createRuleForProp('border', 'theme.borders', '$border')}
-    ${createRuleForProp('border-radius', 'theme.radii', '$borderRadius')}
+    ${createRuleForProp('$border', 'border', 'borders')}
+    ${createRuleForProp('$borderRadius', 'border-radius', 'radii')}
   `;
 
   const themeColorsMixin = css`
-    ${createRuleForProp('background', 'theme.colors', '$bg')}
-    ${createRuleForProp('background-attachment', '', '$bgAttachment')}
-    ${createRuleForProp('background-clip', '', '$bgClip')}
-    ${createRuleForProp('background-color', 'theme.colors', '$bgColor')}
-    ${createRuleForProp('background-image', '', '$bgImage')}
-    ${createRuleForProp('background-origin', '', '$bgOrigin')}
-    ${createRuleForProp('background-position', '', '$bgPosition')}
-    ${createRuleForProp('background-repeat', '', '$bgRepeat')}
-    ${createRuleForProp('background-size', '', '$bgSize')}
-    ${createRuleForProp('color', 'theme.colors', '$color')}
+    ${createRuleForProp('$bg', 'background', 'colors')}
+    ${createRuleForProp('$bgAttachment', 'background-attachment')}
+    ${createRuleForProp('$bgClip', 'background-clip')}
+    ${createRuleForProp('$bgColor', 'background-color', 'colors')}
+    ${createRuleForProp('$bgImage', 'background-image')}
+    ${createRuleForProp('$bgOrigin', 'background-origin')}
+    ${createRuleForProp('$bgPosition', 'background-position')}
+    ${createRuleForProp('$bgRepeat', 'background-repeat')}
+    ${createRuleForProp('$bgSize', 'background-size')}
+    ${createRuleForProp('$color', 'color', 'colors')}
   `;
 
   const themeFontsMixin = css`
-    ${createRuleForProp('font-family', 'theme.fonts', '$font')}
-    ${createRuleForProp('font-size', 'theme.fontSizes', '$fontSize')}
-    ${createRuleForProp('font-style', '', '$fontStyle')}
-    ${createRuleForProp('font-weight', 'theme.fontWeights', '$fontWeight')}
-    ${createRuleForProp('line-height', 'theme.lineHeights', '$lineHeight')}
-    ${createRuleForProp('text-align', '', '$textAlign')}
-    ${createRuleForProp('text-transform', '', '$textTransform')}
+    ${createRuleForProp('$font', 'font-family', 'fonts')}
+    ${createRuleForProp('$fontSize', 'font-size', 'fontSizes')}
+    ${createRuleForProp('$fontStyle', 'font-style')}
+    ${createRuleForProp('$fontWeight', 'font-weight', 'fontWeights')}
+    ${createRuleForProp('$lineHeight', 'line-height', 'lineHeights')}
+    ${createRuleForProp('$textAlign', 'text-align')}
+    ${createRuleForProp('$textTransform', 'text-transform')}
   `;
 
   const themeShadowsMixin = css`
-    ${createRuleForProp('box-shadow', 'theme.shadows', '$shadow')}
-    ${createRuleForProp('text-shadow', 'theme.shadows', '$textShadow')}
+    ${createRuleForProp('$shadow', 'box-shadow', 'shadows')}
+    ${createRuleForProp('$textShadow', 'text-shadow', 'shadows')}
   `;
 
   const themeSizeMixin = css`
-    ${createRuleForProp('flex-basis', 'theme.sizes', '$flexBasis')}
-    ${createRuleForProp('height', 'theme.sizes', '$height')}
-    ${createRuleForProp('max-height', 'theme.sizes', '$maxHeight')}
-    ${createRuleForProp('max-width', 'theme.sizes', '$maxWidth')}
-    ${createRuleForProp('min-height', 'theme.sizes', '$minHeight')}
-    ${createRuleForProp('min-width', 'theme.sizes', '$minWidth')}
-    ${createRuleForProp('width', 'theme.sizes', '$width')}
-
-    ${createRuleForProp('flex-basis', 'theme.space', '$flexBasis')}
-    ${createRuleForProp('height', 'theme.space', '$height')}
-    ${createRuleForProp('max-height', 'theme.space', '$maxHeight')}
-    ${createRuleForProp('max-width', 'theme.space', '$maxWidth')}
-    ${createRuleForProp('min-height', 'theme.space', '$minHeight')}
-    ${createRuleForProp('min-width', 'theme.space', '$minWidth')}
-    ${createRuleForProp('width', 'theme.space', '$width')}
+    ${createRuleForProp('$flexBasis', 'flex-basis', ['sizes', 'space'])}
+    ${createRuleForProp('$height', 'height', ['sizes', 'space'])}
+    ${createRuleForProp('$maxHeight', 'max-height', ['sizes', 'space'])}
+    ${createRuleForProp('$maxWidth', 'max-width', ['sizes', 'space'])}
+    ${createRuleForProp('$minHeight', 'min-height', ['sizes', 'space'])}
+    ${createRuleForProp('$minWidth', 'min-width', ['sizes', 'space'])}
+    ${createRuleForProp('$width', 'width', ['sizes', 'space'])}
   `;
 
   const themeSpaceMixin = css`
-    ${createRuleForProp('margin-bottom', 'theme.space', '$mb')}
-    ${createRuleForProp('margin-bottom', 'theme.space', '$my')}
-    ${createRuleForProp('margin-left', 'theme.space', '$ml')}
-    ${createRuleForProp('margin-left', 'theme.space', '$mx')}
-    ${createRuleForProp('margin-right', 'theme.space', '$mr')}
-    ${createRuleForProp('margin-right', 'theme.space', '$mx')}
-    ${createRuleForProp('margin-top', 'theme.space', '$mt')}
-    ${createRuleForProp('margin-top', 'theme.space', '$my')}
-    ${createRuleForProp('margin', 'theme.space', '$m')}
-    ${createRuleForProp('padding-bottom', 'theme.space', '$pb')}
-    ${createRuleForProp('padding-bottom', 'theme.space', '$py')}
-    ${createRuleForProp('padding-left', 'theme.space', '$pl')}
-    ${createRuleForProp('padding-left', 'theme.space', '$px')}
-    ${createRuleForProp('padding-right', 'theme.space', '$pr')}
-    ${createRuleForProp('padding-right', 'theme.space', '$px')}
-    ${createRuleForProp('padding-top', 'theme.space', '$pt')}
-    ${createRuleForProp('padding-top', 'theme.space', '$py')}
-    ${createRuleForProp('padding', 'theme.space', '$p')}
+    ${createRuleForProp('$m', 'margin', 'space')}
+
+    ${createRuleForProp('$mx', ['margin-right', 'margin-left'], 'space')}
+    ${createRuleForProp('$my', ['margin-top', 'margin-bottom'], 'space')}
+
+    ${createRuleForProp('$mt', 'margin-top', 'space')}
+    ${createRuleForProp('$mr', 'margin-right', 'space')}
+    ${createRuleForProp('$mb', 'margin-bottom', 'space')}
+    ${createRuleForProp('$ml', 'margin-left', 'space')}
+
+    ${createRuleForProp('$p', 'padding', 'space')}
+
+    ${createRuleForProp('$px', ['padding-right', 'padding-left'], 'space')}
+    ${createRuleForProp('$py', ['padding-top', 'padding-bottom'], 'space')}
+
+    ${createRuleForProp('$pt', 'padding-top', 'space')}
+    ${createRuleForProp('$pr', 'padding-right', 'space')}
+    ${createRuleForProp('$pb', 'padding-bottom', 'space')}
+    ${createRuleForProp('$pl', 'padding-left', 'space')}
   `;
 
   const themeMixin = css`
@@ -229,7 +172,6 @@ export function createMixins(media: MediaQueries<Breakpoints>) {
   return {
     boxMixins,
     createRuleForProp,
-    createRuleForPropV2,
     flexChildMixin,
     flexContainerMixin,
     mapResponsive,

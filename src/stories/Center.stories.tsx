@@ -16,7 +16,7 @@ BasicUsage.args = {
   children: 'My content is centered',
   $bgColor: 'tomato',
   $color: 'white',
-  $p: '6'
+  $p: 12
 };
 
 export const ExampleWithIcon: Story<ThemeMixinProps> = (

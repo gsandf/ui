@@ -21,17 +21,17 @@ export const Stack = styled(Flex)<StackProps>`
     p.gap !== undefined &&
     css`
       > * {
-        ${p.theme.mixins.createRuleForProp('margin', '', 'gap')};
+        ${p.theme.mixins.createRuleForProp('gap', 'margin', 'space')};
       }
     `}
 
   ${p => {
     const createRuleForProp = p.theme.mixins.createRuleForProp;
     return css`
-      ${createRuleForProp('align-items', '', 'align')};
-      ${createRuleForProp('flex-direction', '', 'direction')};
-      ${createRuleForProp('justify-content', '', 'justify')};
-      ${createRuleForProp('flex-wrap', '', 'wrap')};
+      ${createRuleForProp('align', 'align-items')};
+      ${createRuleForProp('direction', 'flex-direction')};
+      ${createRuleForProp('justify', 'justify-content')};
+      ${createRuleForProp('wrap', 'flex-wrap')};
     `;
   }};
 `;
