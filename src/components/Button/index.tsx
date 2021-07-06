@@ -17,7 +17,6 @@ export const Button = styled.button<_ButtonProps>`
   appearance: none;
   background-color: transparent;
   border-width: 0;
-  color: inherit;
   display: inline-flex;
   justify-content: center;
   outline: none;
@@ -27,6 +26,10 @@ export const Button = styled.button<_ButtonProps>`
   vertical-align: middle;
   white-space: nowrap;
   width: ${p => (p.isFullWidth ? '100%' : 'auto')};
+
+  a& {
+    color: inherit;
+  }
 
   ${p => p.theme.components?.Button.baseStyle ?? ''};
   ${p => p.variant && p.theme.components?.Button.variants[p.variant]};
