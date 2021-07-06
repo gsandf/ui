@@ -1,41 +1,73 @@
 import { get, getOr } from '@blakek/deep';
-import { css, CSSProp } from 'styled-components';
+import { css, CSSProp, DefaultTheme } from 'styled-components';
 import { omit } from '../utils';
 import type { Breakpoints, MediaQueries, ResponsiveRule } from './types';
 
 export function createMixins(media: MediaQueries<Breakpoints>) {
-  const mediaQueries = Object.values(omit(media.up, 'from'));
+  const mediaQueries = Object.entries(omit(media.up, 'from'));
 
   function mapResponsive<T>(
     styles: ResponsiveRule<T>,
-    mapper: (val: T) => CSSProp
+    mapper: (val: T, breakpointName: string) => CSSProp
   ) {
     if (styles === undefined || styles === null) {
       return;
     }
 
     if (!Array.isArray(styles)) {
-      return mapper(styles);
+      return mapper(styles, 'base');
     }
 
     const [defaultStyle, ...otherStyles] = styles;
 
+    const baseStyle = mapper(defaultStyle, 'base');
+
     const breakpointStyles = otherStyles.flatMap((style, index) => {
-      const styleRules = mapper(style);
+      const styleRules = mapper(style, mediaQueries[index][0]);
 
       if (!styleRules) return [];
 
       return css`
-        ${mediaQueries[index]} {
+        ${mediaQueries[index][1]} {
           ${styleRules}
         }
       `;
     });
 
     return css`
-      ${mapper(defaultStyle)}
+      ${baseStyle}
       ${breakpointStyles}
     `;
+  }
+
+  function createRuleForPropV2(
+    prop: string,
+    ruleName: string | string[],
+    themePath?: keyof DefaultTheme | (keyof DefaultTheme)[]
+  ) {
+    const ruleNames = Array.isArray(ruleName) ? ruleName : [ruleName];
+    const themePaths = Array.isArray(themePath) ? themePath : [themePath];
+
+    return function (props: Record<string, unknown> & { theme: DefaultTheme }) {
+      const styles = props[prop];
+
+      return mapResponsive(styles, (inputValue: string | number) => {
+        // Try and get a value from the theme to apply. Otherwise, use the value
+        // supplied directly.
+        const value = themePaths.reduceRight<string | number>(
+          (currentValue, path) => {
+            return getOr(currentValue, ['theme', path, inputValue], props);
+          },
+          inputValue
+        );
+
+        return ruleNames.map(name =>
+          css({
+            [name]: value
+          })
+        );
+      });
+    };
   }
 
   function createRuleForProp(
@@ -63,7 +95,7 @@ export function createMixins(media: MediaQueries<Breakpoints>) {
           if (!styles) return [];
 
           return css`
-            ${mediaQueries[index]} {
+            ${mediaQueries[index][1]} {
               ${styles}
             }
           `;
@@ -197,6 +229,7 @@ export function createMixins(media: MediaQueries<Breakpoints>) {
   return {
     boxMixins,
     createRuleForProp,
+    createRuleForPropV2,
     flexChildMixin,
     flexContainerMixin,
     mapResponsive,
