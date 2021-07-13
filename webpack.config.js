@@ -1,13 +1,7 @@
 const path = require('path');
 const packageJson = require('./package.json');
 
-const outputTypes = ['commonjs', 'module', 'umd'];
-
-const targets = {
-  commonjs: 'node12',
-  umd: 'web',
-  module: 'es2020'
-};
+const outputTypes = ['commonjs', 'module'];
 
 const externalDependencies = [
   ...Object.keys(packageJson.dependencies),
@@ -31,10 +25,7 @@ function getBaseConfig(outputType) {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: `[name].${outputType}.js`,
-      library: {
-        name: outputType === 'umd' ? 'gsandfui' : undefined,
-        type: outputType
-      },
+      library: { type: outputType },
       libraryTarget: outputType,
       module: outputType === 'module'
     },
@@ -45,16 +36,41 @@ function getBaseConfig(outputType) {
       outputModule: outputType === 'module'
     },
 
-    externals: outputType === 'umd' ? undefined : externals,
+    externals: externals,
 
     mode: 'development',
 
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/
+          test: /\.[jt]sx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    corejs: 3,
+                    loose: true,
+                    modules: outputType === 'commonjs' ? 'commonjs' : false,
+                    targets:
+                      outputType === 'modules'
+                        ? { esmodules: true }
+                        : 'node 12',
+                    useBuiltIns: 'entry'
+                  }
+                ],
+                '@babel/preset-react',
+                '@babel/preset-typescript'
+              ],
+              plugins: [
+                ['styled-components'],
+                ['@babel/plugin-proposal-class-properties', { loose: true }]
+              ]
+            }
+          }
         }
       ]
     },
@@ -66,7 +82,7 @@ function getBaseConfig(outputType) {
       }
     },
 
-    target: targets[outputType]
+    target: outputType === 'commonjs' ? 'node12' : 'es2020'
   };
 }
 

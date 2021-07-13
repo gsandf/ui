@@ -1,6 +1,6 @@
 {
   "name": "@gsandf/ui",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "⚡ A simple set of UI development helpers for React projects",
   "source": "src/index.ts",
   "main": "./dist/gsandf-ui.commonjs.js",
