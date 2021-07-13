@@ -39,18 +39,16 @@
   },
   "ava": {
     "extensions": [
-      "js",
       "ts"
     ],
     "files": [
-      "src/**/*.test.js",
       "src/**/*.test.ts"
     ],
     "ignoredByWatcher": [
       "!src/**"
     ],
     "require": [
-      "ts-node/register"
+      "./.ava-entry.js"
     ]
   },
   "dependencies": {
@@ -94,15 +92,15 @@
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf dist",
     "build:compile": "webpack",
+    "build-storybook": "build-storybook",
     "dev": "yarn storybook",
     "format-check": "amper-scripts format-check .",
     "format": "amper-scripts format-write .",
     "lint": "amper-scripts lint .",
     "prepack": "yarn build",
-    "test": "ava",
-    "typeCheck": "tsc --noEmit",
-    "validate": "run-p format-check lint typeCheck",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "ava",
+    "type-check": "tsc --noEmit",
+    "validate": "run-p format-check lint test type-check"
   }
 }
