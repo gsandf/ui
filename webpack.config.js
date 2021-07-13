@@ -1,4 +1,5 @@
 const path = require('path');
+const packageJson = require('./package.json');
 
 const outputTypes = ['commonjs', 'module', 'umd'];
 
@@ -8,6 +9,19 @@ const targets = {
   module: 'es2020'
 };
 
+const externalDependencies = [
+  ...Object.keys(packageJson.dependencies),
+  ...Object.keys(packageJson.peerDependencies)
+];
+
+const externals = externalDependencies.reduce((externals, packageName) => {
+  return { ...externals, [packageName]: packageName };
+}, {});
+
+/**
+ * @param {string} outputType
+ * @return {import('webpack').Configuration}
+ */
 function getBaseConfig(outputType) {
   return {
     entry: {
@@ -26,6 +40,12 @@ function getBaseConfig(outputType) {
     },
 
     devtool: 'source-map',
+
+    experiments: {
+      outputModule: outputType === 'module'
+    },
+
+    externals: outputType === 'umd' ? undefined : externals,
 
     mode: 'production',
 
@@ -46,11 +66,7 @@ function getBaseConfig(outputType) {
       }
     },
 
-    target: targets[outputType],
-
-    experiments: {
-      outputModule: outputType === 'module'
-    }
+    target: targets[outputType]
   };
 }
 
