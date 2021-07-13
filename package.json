@@ -7,7 +7,7 @@
   "jsnext:main": "./dist/gsandf-ui.module.js",
   "exports": {
     ".": {
-      "browser": "./dist/gsandf-ui.umd.js",
+      "browser": "./dist/gsandf-ui.module.js",
       "import": "./dist/gsandf-ui.module.js",
       "require": "./dist/gsandf-ui.commonjs.js"
     }
