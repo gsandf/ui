@@ -1,19 +1,19 @@
 {
   "name": "@gsandf/ui",
   "version": "0.1.6",
-  "description": "TODO: add description",
+  "description": "⚡ A simple set of UI development helpers for React projects",
   "source": "src/index.ts",
-  "main": "dist/gsandf-ui.js",
-  "jsnext:main": "./dist/gsandf-ui.modern.js",
+  "main": "./dist/gsandf-ui.commonjs.js",
+  "jsnext:main": "./dist/gsandf-ui.module.js",
   "exports": {
     ".": {
-      "browser": "./dist/gsandf-ui.modern.js",
-      "import": "./dist/gsandf-ui.modern.js",
-      "require": "./dist/gsandf-ui.js"
+      "browser": "./dist/gsandf-ui.umd.js",
+      "import": "./dist/gsandf-ui.module.js",
+      "require": "./dist/gsandf-ui.commonjs.js"
     }
   },
-  "module": "dist/gsandf-ui.esm.js",
-  "types": "dist/index.d.ts",
+  "module": "./dist/gsandf-ui.module.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
   ],
@@ -21,9 +21,9 @@
   "author": "GS&F Devs <dev@gsandf.com> (https://gsandf.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "TODO: add issue URL"
+    "url": "https://github.com/gsandf/ui/issues"
   },
-  "homepage": "TODO: add repo web page URL",
+  "homepage": "https://github.com/gsandf/ui",
   "keywords": [
     "accessible",
     "components",
@@ -35,7 +35,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "TODO: add repo URL"
+    "url": "https://github.com/gsandf/ui.git"
   },
   "ava": {
     "extensions": [
@@ -66,12 +66,12 @@
     "@storybook/addon-essentials": "6.3.2",
     "@storybook/addon-links": "6.3.2",
     "@storybook/react": "6.3.2",
-    "@types/node": "^15.12.5",
-    "@types/react": "^17.0.11",
+    "@types/node": "^16.3.1",
+    "@types/react": "^17.0.14",
     "@types/styled-components": "^5.1.10",
     "amper-scripts": "^1.2.0",
     "ava": "^3.15.0",
-    "babel-plugin-styled-components": "^1.13.1",
+    "babel-plugin-styled-components": "^1.13.2",
     "microbundle": "^0.13.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
@@ -79,8 +79,11 @@
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "styled-components": "^5.3.0",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.3.4"
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.4",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2"
   },
   "peerDependencies": {
     "react": ">=16",
@@ -90,7 +93,7 @@
   "scripts": {
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf dist",
-    "build:compile": "microbundle --format cjs,esm,modern",
+    "build:compile": "webpack",
     "dev": "yarn storybook",
     "format-check": "amper-scripts format-check .",
     "format": "amper-scripts format-write .",
