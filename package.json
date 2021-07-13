@@ -1,13 +1,13 @@
 {
   "name": "@gsandf/ui",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "⚡ A simple set of UI development helpers for React projects",
   "source": "src/index.ts",
   "main": "./dist/gsandf-ui.commonjs.js",
   "jsnext:main": "./dist/gsandf-ui.module.js",
   "exports": {
     ".": {
-      "browser": "./dist/index.js",
+      "browser": "./dist/gsandf-ui.commonjs.js",
       "import": "./dist/gsandf-ui.module.js",
       "require": "./dist/gsandf-ui.commonjs.js"
     }
@@ -54,10 +54,12 @@
   "dependencies": {
     "@blakek/array-split": "^2.0.1",
     "@blakek/deep": "^2.2.0",
+    "babel-loader": "^8.2.2",
     "polished": "^4.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@blakek/range": "^1.0.0",
     "@storybook/addon-actions": "6.3.4",
@@ -77,7 +79,6 @@
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "styled-components": "^5.3.0",
-    "ts-loader": "^9.2.3",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.4",
     "webpack": "^5.44.0",
@@ -91,7 +92,7 @@
   "scripts": {
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf dist",
-    "build:compile": "tsc",
+    "build:compile": "webpack",
     "build-storybook": "build-storybook",
     "dev": "yarn storybook",
     "format-check": "amper-scripts format-check .",
