@@ -47,7 +47,7 @@ function getBaseConfig(outputType) {
 
     externals: outputType === 'umd' ? undefined : externals,
 
-    mode: 'production',
+    mode: 'development',
 
     module: {
       rules: [
