@@ -44,33 +44,8 @@ function getBaseConfig(outputType) {
       rules: [
         {
           test: /\.[jt]sx?$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    corejs: 3,
-                    loose: true,
-                    modules: outputType === 'commonjs' ? 'commonjs' : false,
-                    targets:
-                      outputType === 'modules'
-                        ? { esmodules: true }
-                        : 'node 12',
-                    useBuiltIns: 'entry'
-                  }
-                ],
-                '@babel/preset-react',
-                '@babel/preset-typescript'
-              ],
-              plugins: [
-                ['styled-components'],
-                ['@babel/plugin-proposal-class-properties', { loose: true }]
-              ]
-            }
-          }
+          loader: 'ts-loader',
+          exclude: /node_modules/
         }
       ]
     },
