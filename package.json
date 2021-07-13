@@ -1,13 +1,13 @@
 {
   "name": "@gsandf/ui",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "⚡ A simple set of UI development helpers for React projects",
   "source": "src/index.ts",
   "main": "./dist/gsandf-ui.commonjs.js",
   "jsnext:main": "./dist/gsandf-ui.module.js",
   "exports": {
     ".": {
-      "browser": "./dist/gsandf-ui.commonjs.js",
+      "browser": "./dist/index.js",
       "import": "./dist/gsandf-ui.module.js",
       "require": "./dist/gsandf-ui.commonjs.js"
     }
