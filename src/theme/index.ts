@@ -18,10 +18,6 @@ type DefaultTheme = typeof defaultTheme;
 
 export interface Theme extends CreatedTheme<DefaultTheme> {}
 
-declare module 'styled-components' {
-  export interface DefaultTheme extends Theme {}
-}
-
 export function createTheme<T extends CustomTheme>(
   theme: T
 ): CreatedTheme<DefaultTheme & T> {
