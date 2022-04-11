@@ -8,3 +8,7 @@ dist/
 logs
 *.log
 npm-debug.log*
+
+# Misc.
+.cache
+.DS_Store
