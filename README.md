@@ -26,7 +26,7 @@ You can do this easily using the default theme. For example:
 import { createTheme, defaultTheme } from '@gsandf/ui';
 import { ThemeProvider } from 'styled-components';
 
-const theme = createTheme({ ...defaultTheme });
+export const theme = createTheme({ ...defaultTheme });
 const GlobalStyles = theme.styles;
 
 export default function App({ children }) {
@@ -37,6 +37,13 @@ export default function App({ children }) {
       {children}
     </ThemeProvider>
   );
+}
+
+// If you use TypeScript, add an interface for the theme:
+export type Theme = typeof theme;
+
+declare module 'styled-components' {
+  interface DefaultTheme extends Theme {}
 }
 ```
 
